@@ -10,7 +10,8 @@ class Pelicula {
     private int edadMinima;
     private String director;
 
-    public Pelicula(String titulo, int duracion, int edadMinima, String director) {
+    public Pelicula(String titulo, int duracion, int edadMinima, 
+            String director) {
         this.titulo = titulo;
         this.duracion = duracion;
         this.edadMinima = edadMinima;
@@ -61,7 +62,8 @@ class Espectador {
 
 // Clase Asiento
 class Asiento {
-    private static Asiento[][] matrizAsientos = new Asiento[8][9]; // Matriz estática 8x9
+    private static Asiento[][] matrizAsientos = new Asiento[8][9]; 
+// Matriz estática 8x9
     private int fila;
     private char columna;
     private Espectador espectador;
@@ -75,7 +77,8 @@ class Asiento {
     public static void inicializarAsientos() {
         for (int i = 0; i < matrizAsientos.length; i++) {
             for (int j = 0; j < matrizAsientos[i].length; j++) {
-                matrizAsientos[i][j] = new Asiento(8 - i, (char) ('A' + j)); // Fila 1 es la última de la matriz
+                matrizAsientos[i][j] = new Asiento(8 - i, (char) ('A' + j));
+                // Fila 1 es la última de la matriz
             }
         }
     }
@@ -106,15 +109,19 @@ class Asiento {
     public static void mostrarAsientos() {
         for (Asiento[] fila : matrizAsientos) {
             for (Asiento asiento : fila) {
-                System.out.print(asiento.getPosicion() + " (" + (asiento.estaOcupado() ? "🔴" : "⭕") + ")  ");//🔴=ocupado ⭕=libre
+                System.out.print(asiento.getPosicion() +
+                        " (" + (asiento.estaOcupado() ? "🔴" : "⭕") + ")  ");
+//🔴=ocupado ⭕=libre
             }
             System.out.println();
         }
     }
 
-    public static void asignarAsientoAleatorio(Espectador espectador, double precioEntrada) {
+    public static void asignarAsientoAleatorio(Espectador espectador, 
+            double precioEntrada) {
         if (!Cine.puedeSentarse(espectador, precioEntrada)) {
-            System.out.println(espectador.getNombre() + " no puede sentarse (Edad o Dinero insuficiente).");
+            System.out.println(espectador.getNombre() + 
+                    " no puede sentarse (Edad o Dinero insuficiente).");
             return;
         }
 
@@ -126,7 +133,8 @@ class Asiento {
             if (!asiento.estaOcupado()) {
                 asiento.asignarEspectador(espectador);
                 espectador.setDinero(espectador.getDinero() - precioEntrada);
-                System.out.println("Espectador " + espectador.getNombre() + " asignado al asiento " + asiento.getPosicion());
+                System.out.println("Espectador " + espectador.getNombre() +
+                        " asignado al asiento " + asiento.getPosicion());
                 break;
             }
         }
@@ -144,8 +152,10 @@ class Cine {
         Asiento.inicializarAsientos();
     }
 
-    public static boolean puedeSentarse(Espectador espectador, double precioEntrada) {
-        return espectador.getEdad() >= 16 && espectador.getDinero() >= precioEntrada;
+    public static boolean puedeSentarse(Espectador espectador, 
+            double precioEntrada) {
+        return espectador.getEdad() >= 16 && espectador.getDinero() 
+                >= precioEntrada;
     }
 
     public Pelicula getPelicula() {
